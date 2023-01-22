@@ -1,7 +1,7 @@
 [Desktop Entry]
 Encoding=UTF-8
 Name=Task Pager
-Comment=Task manager and pager hybrid
+Comment=Taskbar-pager hybrid
 Type=Service
 
 X-KDE-ParentApp=
