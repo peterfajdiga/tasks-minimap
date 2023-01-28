@@ -10,6 +10,7 @@ MouseArea {
         Repeater {
             model: pagerModel
             Rectangle {
+                visible: index === pagerModel.currentPage
                 width: 160; height: 40
                 border.width: 1
                 color: "yellow"
