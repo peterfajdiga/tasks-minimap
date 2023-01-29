@@ -2,7 +2,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.private.pager 2.0
+import org.kde.taskmanager 0.1 as TaskManager
 import "./utils.js" as Utils
 
 MouseArea {
@@ -13,32 +13,20 @@ MouseArea {
     Layout.fillHeight: true
 
     Row {
+        id: tasksContainer
         anchors.centerIn: parent
-        Repeater {
-            model: pagerModel
-            Rectangle {
-                visible: index === pagerModel.currentPage
-                width: 160; height: 40
-                border.width: 1
-                color: "yellow"
-                Row {
-                    id: tasksContainer
-                    anchors.centerIn: parent
-                    property var taskItems: []
-                    Connections {
-                        target: TasksModel
-                        function onDataChanged(a, b, c) {
-                            refreshDelayer.restart();
-                        }
-                    }
-                    Timer {
-                        id: refreshDelayer
-                        interval: 100
-                        onTriggered: {
-                            Utils.updateTasks(TasksModel, tasksContainer);
-                        }
-                    }
-                }
+        property var taskItems: []
+        Connections {
+            target: tasksModel
+            function onDataChanged(a, b, c) {
+                refreshDelayer.restart();
+            }
+        }
+        Timer {
+            id: refreshDelayer
+            interval: 100
+            onTriggered: {
+                Utils.updateTasks(tasksModel, tasksContainer);
             }
         }
     }
@@ -60,16 +48,14 @@ MouseArea {
         }
     }
 
-    PagerModel {
-        id: pagerModel
-
-        enabled: root.visible
-
-        showDesktop: false
-
-        showOnlyCurrentScreen: false // TODO: Plasmoid.configuration.showOnlyCurrentScreen
+    TaskManager.TasksModel {
+        id: tasksModel
+        virtualDesktop: virtualDesktopInfo.currentDesktop
         screenGeometry: Plasmoid.screenGeometry
+        filterByVirtualDesktop: true
+    }
 
-        pagerType: PagerModel.VirtualDesktops
+    TaskManager.VirtualDesktopInfo {
+        id: virtualDesktopInfo
     }
 }
