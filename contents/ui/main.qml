@@ -44,6 +44,7 @@ MouseArea {
             width: 16; height: 16
             border.width: 1
             color: "orange"
+            opacity: model.IsMinimized ? 0.33 : 1.0
             PlasmaCore.IconItem {
                 anchors.centerIn: parent
                 source: parent.model.decoration
