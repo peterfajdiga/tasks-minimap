@@ -5,6 +5,7 @@ const TASK_ROLE_GEOMETRY = 289;
 function updateTasks(tasksModel, tasksContainer) {
     destroyTaskItems(tasksContainer);
     const tasks = extractTasks(tasksModel);
+    sortTasks(tasks);
     createTaskItems(tasksContainer, tasks);
 }
 
@@ -33,4 +34,22 @@ function extractTasks(tasksModel) {
         };
     }
     return tasks;
+}
+
+function sortTasks(tasks) {
+    tasks.sort((a, b) => {
+        if (a.Geometry.x < b.Geometry.x) {
+            return -1;
+        } else if (a.Geometry.x > b.Geometry.x) {
+            return 1;
+        } else {
+            if (a.Geometry.y < b.Geometry.y) {
+                return -1;
+            } else if (a.Geometry.y > b.Geometry.y) {
+                return 1;
+            } else {
+                return 0;
+            }
+        }
+    });
 }
