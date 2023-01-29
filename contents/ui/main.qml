@@ -42,8 +42,8 @@ MouseArea {
         Rectangle {
             property var model
             width: 16; height: 16
-            border.width: 1
-            color: "orange"
+            border.width: model.IsActive ? 1 : 0
+            color: model.IsActive ? "white" : "transparent"
             opacity: model.IsMinimized ? 0.33 : 1.0
             PlasmaCore.IconItem {
                 anchors.centerIn: parent

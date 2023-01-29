@@ -1,6 +1,7 @@
 const TASK_ROLE_TITLE = 0;
 const TASK_ROLE_ICON = 1;
 const TASK_ROLE_GEOMETRY = 289;
+const TASK_ROLE_FOCUSED = 272;
 const TASK_ROLE_MINIMIZED = 279;
 const TASK_ROLE_MINIMIZED2 = 300;
 
@@ -34,6 +35,7 @@ function extractTasks(tasksModel) {
             decoration: tasksModel.data(taskIndex, TASK_ROLE_ICON),
             Geometry: tasksModel.data(taskIndex, TASK_ROLE_GEOMETRY),
             IsMinimized: tasksModel.data(taskIndex, TASK_ROLE_MINIMIZED),
+            IsActive: tasksModel.data(taskIndex, TASK_ROLE_FOCUSED),
         };
     }
     return tasks;
