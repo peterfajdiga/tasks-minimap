@@ -8,8 +8,10 @@ const TASK_ROLE_MINIMIZED2 = 300;
 function updateTasks(tasksModel, tasksContainer) {
     destroyTaskItems(tasksContainer);
     const tasks = extractTasks(tasksModel);
-    sortTasks(tasks);
-    createTaskItems(tasksContainer, tasks);
+    const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
+    sortTasks(normalTasks);
+    createTaskItems(tasksContainer, normalTasks);
+    createTaskItems(tasksContainer, minimizedTasks);
 }
 
 function destroyTaskItems(tasksContainer) {
@@ -41,25 +43,32 @@ function extractTasks(tasksModel) {
     return tasks;
 }
 
+function splitMinimizedTasks(tasks) {
+    const minimized = [];
+    const normal = [];
+    for (const task of tasks) {
+        if (task.IsMinimized) {
+            minimized.push(task);
+        } else {
+            normal.push(task);
+        }
+    }
+    return [minimized, normal];
+}
+
 function sortTasks(tasks) {
     tasks.sort((a, b) => {
-        if (a.IsMinimized && !b.IsMinimized) {
+        if (a.Geometry.x < b.Geometry.x) {
             return -1;
-        } else if (!a.IsMinimized && b.IsMinimized) {
+        } else if (a.Geometry.x > b.Geometry.x) {
             return 1;
         } else {
-            if (a.Geometry.x < b.Geometry.x) {
+            if (a.Geometry.y < b.Geometry.y) {
                 return -1;
-            } else if (a.Geometry.x > b.Geometry.x) {
+            } else if (a.Geometry.y > b.Geometry.y) {
                 return 1;
             } else {
-                if (a.Geometry.y < b.Geometry.y) {
-                    return -1;
-                } else if (a.Geometry.y > b.Geometry.y) {
-                    return 1;
-                } else {
-                    return 0;
-                }
+                return 0;
             }
         }
     });
