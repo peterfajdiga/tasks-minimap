@@ -14,14 +14,20 @@ MouseArea {
 
     Row {
         id: tasksContainer
-        anchors.centerIn: parent
+
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.top: parent.top
+        anchors.bottom: parent.bottom
+
         property var taskItems: []
+
         Connections {
             target: tasksModel
             function onDataChanged(a, b, c) {
                 refreshDelayer.restart();
             }
         }
+
         Timer {
             id: refreshDelayer
             interval: 100
@@ -33,23 +39,29 @@ MouseArea {
 
     Component {
         id: taskComponent
+
         Rectangle {
-            property var model
-            width: 16; height: 16
-            border.width: model.IsActive ? 1 : 0
-            color: model.IsActive ? "white" : "transparent"
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+
+            color: model.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
             opacity: model.IsMinimized ? 0.33 : 1.0
+
+            property var model
+
             PlasmaCore.IconItem {
                 anchors.centerIn: parent
+                width: height
+                height: Math.round(parent.height * 0.8)
                 source: parent.model.decoration
-                height: parent.height
-                width: parent.width
             }
         }
     }
 
     TaskManager.TasksModel {
         id: tasksModel
+
         virtualDesktop: virtualDesktopInfo.currentDesktop
         screenGeometry: Plasmoid.screenGeometry
         groupMode: TaskManager.TasksModel.GroupDisabled
