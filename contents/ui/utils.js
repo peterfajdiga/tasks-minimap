@@ -11,6 +11,7 @@ function updateTasks(tasksModel, tasksContainer) {
     const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
     sortTasks(normalTasks);
     createTaskItems(tasksContainer, normalTasks);
+    createTaskItem(tasksContainer, taskSeparatorComponent);
     createTaskItems(tasksContainer, minimizedTasks);
 }
 
@@ -21,10 +22,19 @@ function destroyTaskItems(tasksContainer) {
     tasksContainer.taskItems = [];
 }
 
+function createTaskItem(tasksContainer, component) {
+    const taskItem = component.createObject(tasksContainer);
+    tasksContainer.taskItems.push(taskItem);
+}
+
+function createTaskItemWithProperties(tasksContainer, component, properties) {
+    const taskItem = component.createObject(tasksContainer, properties);
+    tasksContainer.taskItems.push(taskItem);
+}
+
 function createTaskItems(tasksContainer, tasks) {
     for (const task of tasks) {
-        const taskItem = taskComponent.createObject(tasksContainer, { model: task });
-        tasksContainer.taskItems.push(taskItem);
+        createTaskItemWithProperties(tasksContainer, taskComponent, { model: task });
     }
 }
 

@@ -62,6 +62,17 @@ MouseArea {
         }
     }
 
+    Component {
+        id: taskSeparatorComponent
+
+        Rectangle {
+            anchors.top: parent.top
+            anchors.bottom: parent.bottom
+            width: height
+            color: "transparent"
+        }
+    }
+
     TaskManager.TasksModel {
         id: tasksModel
 
