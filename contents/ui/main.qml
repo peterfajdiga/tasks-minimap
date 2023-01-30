@@ -26,6 +26,9 @@ MouseArea {
             function onDataChanged(a, b, c) {
                 refreshDelayer.restart();
             }
+            function onRowsRemoved() {
+                refreshDelayer.restart();
+            }
         }
 
         Timer {
