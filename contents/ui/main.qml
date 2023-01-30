@@ -12,6 +12,8 @@ MouseArea {
     Layout.fillWidth: true
     Layout.fillHeight: true
 
+    readonly property bool showMinimized: true
+
     Row {
         id: tasksContainer
 

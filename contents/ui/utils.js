@@ -11,8 +11,10 @@ function updateTasks(tasksModel, tasksContainer) {
     const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
     sortTasks(normalTasks);
     createTaskItems(tasksContainer, normalTasks);
-    createTaskItem(tasksContainer, taskSeparatorComponent);
-    createTaskItems(tasksContainer, minimizedTasks);
+    if (showMinimized && minimizedTasks.length > 0) {
+        createTaskItem(tasksContainer, taskSeparatorComponent);
+        createTaskItems(tasksContainer, minimizedTasks);
+    }
 }
 
 function destroyTaskItems(tasksContainer) {
