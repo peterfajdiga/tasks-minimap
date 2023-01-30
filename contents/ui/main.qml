@@ -52,6 +52,7 @@ MouseArea {
         id: tasksModel
         virtualDesktop: virtualDesktopInfo.currentDesktop
         screenGeometry: Plasmoid.screenGeometry
+        groupMode: TaskManager.TasksModel.GroupDisabled
         filterByVirtualDesktop: true
     }
 
