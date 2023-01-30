@@ -6,38 +6,15 @@ const TASK_ROLE_MINIMIZED = 279;
 const TASK_ROLE_MINIMIZED2 = 300;
 
 function updateTasks(tasksModel, tasksContainer) {
-    destroyTaskItems(tasksContainer);
     const tasks = extractTasks(tasksModel);
     const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
     sortTasks(normalTasks);
-    createTaskItems(tasksContainer, normalTasks);
+
+    let displayTasks = normalTasks;
     if (showMinimized && minimizedTasks.length > 0) {
-        createTaskItem(tasksContainer, taskSeparatorComponent);
-        createTaskItems(tasksContainer, minimizedTasks);
+        displayTasks = displayTasks.concat(minimizedTasks);
     }
-}
-
-function destroyTaskItems(tasksContainer) {
-    for (const taskItem of tasksContainer.taskItems) {
-       taskItem.destroy();
-    }
-    tasksContainer.taskItems = [];
-}
-
-function createTaskItem(tasksContainer, component) {
-    const taskItem = component.createObject(tasksContainer);
-    tasksContainer.taskItems.push(taskItem);
-}
-
-function createTaskItemWithProperties(tasksContainer, component, properties) {
-    const taskItem = component.createObject(tasksContainer, properties);
-    tasksContainer.taskItems.push(taskItem);
-}
-
-function createTaskItems(tasksContainer, tasks) {
-    for (const task of tasks) {
-        createTaskItemWithProperties(tasksContainer, taskComponent, { model: task });
-    }
+    tasksContainer.tasks = displayTasks;
 }
 
 function extractTasks(tasksModel) {

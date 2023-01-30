@@ -21,7 +21,27 @@ MouseArea {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        property var taskItems: []
+        property var tasks: []
+
+        Repeater {
+            model: parent.tasks
+
+            Rectangle {
+                anchors.top: parent.top
+                anchors.bottom: parent.bottom
+                width: height
+
+                color: modelData.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
+                opacity: modelData.IsMinimized ? 0.33 : 1.0
+
+                PlasmaCore.IconItem {
+                    anchors.centerIn: parent
+                    width: height
+                    height: Math.round(parent.height * 0.8)
+                    source: modelData.decoration
+                }
+            }
+        }
 
         Connections {
             target: tasksModel
@@ -39,39 +59,6 @@ MouseArea {
             onTriggered: {
                 Utils.updateTasks(tasksModel, tasksContainer);
             }
-        }
-    }
-
-    Component {
-        id: taskComponent
-
-        Rectangle {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            width: height
-
-            color: model.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
-            opacity: model.IsMinimized ? 0.33 : 1.0
-
-            property var model
-
-            PlasmaCore.IconItem {
-                anchors.centerIn: parent
-                width: height
-                height: Math.round(parent.height * 0.8)
-                source: parent.model.decoration
-            }
-        }
-    }
-
-    Component {
-        id: taskSeparatorComponent
-
-        Rectangle {
-            anchors.top: parent.top
-            anchors.bottom: parent.bottom
-            width: height
-            color: "transparent"
         }
     }
 
