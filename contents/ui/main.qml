@@ -8,9 +8,12 @@ import "./utils.js" as Utils
 MouseArea {
     id: root
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    anchors.fill: parent
     Layout.fillWidth: true
     Layout.fillHeight: true
+
+    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    Plasmoid.constraintHints: PlasmaCore.Types.CanFillArea
 
     readonly property bool showMinimized: true
     readonly property color taskBgColor: Utils.colorAlpha(PlasmaCore.ColorScope.textColor, 0.2)
