@@ -15,7 +15,7 @@ function updateTasks(tasksModel, tasksContainer) {
 
     let displayGroups = columns;
     if (showMinimized && minimizedTasks.length > 0) {
-        displayGroups = displayGroups.concat([[]], minimizedGroups);
+        displayGroups = displayGroups.concat(minimizedGroups);
     }
     tasksContainer.taskGroups = displayGroups;
 }
