@@ -30,6 +30,7 @@ function extractTasks(tasksModel) {
             Geometry: tasksModel.data(taskIndex, TASK_ROLE_GEOMETRY),
             IsMinimized: tasksModel.data(taskIndex, TASK_ROLE_MINIMIZED),
             IsActive: tasksModel.data(taskIndex, TASK_ROLE_FOCUSED),
+            tasksManagerIndex: taskIndex,
         };
     }
     return tasks;

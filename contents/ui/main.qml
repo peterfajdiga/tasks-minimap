@@ -48,19 +48,30 @@ MouseArea {
                     Repeater {
                         model: modelData
 
-                        Rectangle {
+                        MouseArea {
                             width: parent.parent.width
                             Layout.fillHeight: true
 
-                            color: modelData.IsMinimized ? "transparent" : modelData.IsActive ? taskBgColorFocused : taskBgColor
-                            opacity: modelData.IsMinimized ? 0.33 : 1.0
+                            onReleased: {
+                                if (mouse.button === Qt.LeftButton) {
+                                    tasksModel.requestActivate(modelData.tasksManagerIndex);
+                                }
+                            }
 
-                            PlasmaCore.IconItem {
-                                anchors.centerIn: parent
+                            Rectangle {
                                 width: parent.width
-                                height: Math.round(parent.height * 0.75)
-                                source: modelData.decoration
-                                roundToIconSize: height >= 16
+                                height: parent.height
+
+                                color: modelData.IsMinimized ? "transparent" : modelData.IsActive ? taskBgColorFocused : taskBgColor
+                                opacity: modelData.IsMinimized ? 0.33 : 1.0
+
+                                PlasmaCore.IconItem {
+                                    anchors.centerIn: parent
+                                    width: parent.width
+                                    height: Math.round(parent.height * 0.75)
+                                    source: modelData.decoration
+                                    roundToIconSize: height >= 16
+                                }
                             }
                         }
                     }
