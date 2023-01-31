@@ -21,24 +21,43 @@ MouseArea {
         anchors.top: parent.top
         anchors.bottom: parent.bottom
 
-        property var tasks: []
+        property var taskGroups: []
 
         Repeater {
-            model: parent.tasks
+            model: parent.taskGroups
 
             Rectangle {
                 anchors.top: parent.top
                 anchors.bottom: parent.bottom
                 width: height
 
-                color: modelData.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
-                opacity: modelData.IsMinimized ? 0.33 : 1.0
+                color: "transparent"
 
-                PlasmaCore.IconItem {
-                    anchors.centerIn: parent
+                ColumnLayout {
+                    anchors.top: parent.top
+                    anchors.bottom: parent.bottom
                     width: height
-                    height: Math.round(parent.height * 0.8)
-                    source: modelData.decoration
+                    spacing: 0
+
+                    Repeater {
+                        model: modelData
+
+                        Rectangle {
+                            anchors.left: parent.left
+                            anchors.right: parent.right
+                            Layout.fillHeight: true
+
+                            color: modelData.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
+                            opacity: modelData.IsMinimized ? 0.33 : 1.0
+
+                            PlasmaCore.IconItem {
+                                anchors.centerIn: parent
+                                width: parent.width
+                                height: Math.round(parent.height * 0.8)
+                                source: modelData.decoration
+                            }
+                        }
+                    }
                 }
             }
         }

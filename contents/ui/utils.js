@@ -10,11 +10,14 @@ function updateTasks(tasksModel, tasksContainer) {
     const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
     sortTasks(normalTasks);
 
-    let displayTasks = normalTasks;
+    const minimizedGroups = groupTasks(minimizedTasks, task => task);
+    const columns = groupTasks(normalTasks, task => task.Geometry.x);
+
+    let displayGroups = columns;
     if (showMinimized && minimizedTasks.length > 0) {
-        displayTasks = displayTasks.concat(minimizedTasks);
+        displayGroups = displayGroups.concat([[]], minimizedGroups);
     }
-    tasksContainer.tasks = displayTasks;
+    tasksContainer.taskGroups = displayGroups;
 }
 
 function extractTasks(tasksModel) {
@@ -61,4 +64,20 @@ function sortTasks(tasks) {
             }
         }
     });
+}
+
+function groupTasks(tasks, getGroupKey) {
+    const groups = [];
+    let lastGroupKey = undefined;
+    let lastGroup = undefined;
+    for (const task of tasks) {
+        const groupKey = getGroupKey(task);
+        if (groupKey !== lastGroupKey) {
+            lastGroupKey = groupKey;
+            lastGroup = [];
+            groups.push(lastGroup);
+        }
+        lastGroup.push(task);
+    }
+    return groups;
 }
