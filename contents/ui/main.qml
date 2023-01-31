@@ -53,11 +53,11 @@ MouseArea {
                             opacity: modelData.IsMinimized ? 0.33 : 1.0
 
                             PlasmaCore.IconItem {
-                                visible: height >= 16
                                 anchors.centerIn: parent
                                 width: parent.width
                                 height: Math.round(parent.height * 0.75)
                                 source: modelData.decoration
+                                roundToIconSize: height >= 16
                             }
                         }
                     }
