@@ -54,8 +54,21 @@ Item {
                             Layout.fillHeight: true
 
                             onReleased: {
-                                if (mouse.button === Qt.LeftButton) {
-                                    tasksModel.requestActivate(modelData.tasksManagerIndex);
+                                switch (mouse.button) {
+                                    case Qt.LeftButton: {
+                                        tasksModel.requestActivate(modelData.tasksManagerIndex);
+                                        break;
+                                    }
+                                    case Qt.MiddleButton: {
+                                        tasksModel.requestClose(modelData.tasksManagerIndex);
+                                        break;
+                                    }
+                                    case Qt.RightButton: {
+                                        if (!modelData.IsMinimized) {
+                                            tasksModel.requestToggleMinimized(modelData.tasksManagerIndex);
+                                        }
+                                        break;
+                                    }
                                 }
                             }
 
