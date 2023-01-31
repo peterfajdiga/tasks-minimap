@@ -5,7 +5,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.taskmanager 0.1 as TaskManager
 import "./utils.js" as Utils
 
-MouseArea {
+Item {
     id: root
 
     anchors.fill: parent
