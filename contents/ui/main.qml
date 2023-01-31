@@ -18,7 +18,7 @@ MouseArea {
     readonly property bool showMinimized: true
     readonly property color taskBgColor: Utils.colorAlpha(PlasmaCore.ColorScope.textColor, 0.2)
     readonly property color taskBgColorFocused: PlasmaCore.ColorScope.highlightColor
-    readonly property color taskBgColorHovered: PlasmaCore.ColorScope.highlightColor
+    readonly property color taskBgColorHovered: Qt.tint(taskBgColorFocused, taskBgColor)
 
     Row {
         id: tasksContainer
