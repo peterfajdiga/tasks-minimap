@@ -43,8 +43,7 @@ MouseArea {
                         model: modelData
 
                         Rectangle {
-                            anchors.left: parent.left
-                            anchors.right: parent.right
+                            width: parent.parent.width
                             Layout.fillHeight: true
 
                             color: modelData.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
