@@ -18,6 +18,7 @@ MouseArea {
     readonly property bool showMinimized: true
     readonly property color taskBgColor: Utils.colorAlpha(PlasmaCore.ColorScope.textColor, 0.2)
     readonly property color taskBgColorFocused: PlasmaCore.ColorScope.highlightColor
+    readonly property color taskBgColorHovered: PlasmaCore.ColorScope.highlightColor
 
     Row {
         id: tasksContainer
@@ -62,7 +63,10 @@ MouseArea {
                                 width: parent.width
                                 height: parent.height
 
-                                color: modelData.IsMinimized ? "transparent" : modelData.IsActive ? taskBgColorFocused : taskBgColor
+                                color: hoverHandler.hovered ? taskBgColorHovered :
+                                    modelData.IsMinimized ? "transparent" :
+                                    modelData.IsActive ? taskBgColorFocused :
+                                    taskBgColor
                                 opacity: modelData.IsMinimized ? 0.33 : 1.0
 
                                 PlasmaCore.IconItem {
@@ -72,6 +76,10 @@ MouseArea {
                                     source: modelData.decoration
                                     roundToIconSize: height >= 16
                                 }
+                            }
+
+                            HoverHandler {
+                                id: hoverHandler
                             }
                         }
                     }
