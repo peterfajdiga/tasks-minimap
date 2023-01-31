@@ -10,14 +10,12 @@ function updateTasks(tasksModel, tasksContainer) {
     const [minimizedTasks, normalTasks] = splitMinimizedTasks(tasks);
     sortTasks(normalTasks);
 
-    const minimizedGroups = groupTasks(minimizedTasks, task => task);
-    const columns = groupTasks(normalTasks, task => task.Geometry.x);
-
-    let displayGroups = columns;
+    let groups = groupTasks(normalTasks, task => task.Geometry.x);
     if (showMinimized && minimizedTasks.length > 0) {
-        displayGroups = displayGroups.concat(minimizedGroups);
+        const minimizedGroups = groupTasks(minimizedTasks, task => task);
+        groups = groups.concat(minimizedGroups);
     }
-    tasksContainer.taskGroups = displayGroups;
+    tasksContainer.taskGroups = groups;
 }
 
 function extractTasks(tasksModel) {
