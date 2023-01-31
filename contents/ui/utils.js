@@ -81,3 +81,7 @@ function groupTasks(tasks, getGroupKey) {
     }
     return groups;
 }
+
+function colorAlpha(color, alpha) {
+    return Qt.rgba(color.r, color.g, color.b, alpha);
+}

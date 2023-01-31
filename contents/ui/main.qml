@@ -13,6 +13,8 @@ MouseArea {
     Layout.fillHeight: true
 
     readonly property bool showMinimized: true
+    readonly property color taskBgColor: Utils.colorAlpha(PlasmaCore.ColorScope.textColor, 0.2)
+    readonly property color taskBgColorFocused: PlasmaCore.ColorScope.highlightColor
 
     Row {
         id: tasksContainer
@@ -20,6 +22,7 @@ MouseArea {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.top: parent.top
         anchors.bottom: parent.bottom
+        spacing: 2
 
         property var taskGroups: []
 
@@ -36,8 +39,8 @@ MouseArea {
                 ColumnLayout {
                     anchors.top: parent.top
                     anchors.bottom: parent.bottom
-                    width: height
-                    spacing: 0
+                    width: parent.width
+                    spacing: 2
 
                     Repeater {
                         model: modelData
@@ -46,13 +49,14 @@ MouseArea {
                             width: parent.parent.width
                             Layout.fillHeight: true
 
-                            color: modelData.IsActive ? PlasmaCore.ColorScope.highlightColor : "transparent"
+                            color: modelData.IsMinimized ? "transparent" : modelData.IsActive ? taskBgColorFocused : taskBgColor
                             opacity: modelData.IsMinimized ? 0.33 : 1.0
 
                             PlasmaCore.IconItem {
+                                visible: height >= 16
                                 anchors.centerIn: parent
                                 width: parent.width
-                                height: Math.round(parent.height * 0.8)
+                                height: Math.round(parent.height * 0.75)
                                 source: modelData.decoration
                             }
                         }
