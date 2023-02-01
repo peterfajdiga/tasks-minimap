@@ -1,4 +1,4 @@
-PACKAGE_NAME := peterfajdiga.plasma.taskpager
+PACKAGE_NAME := peterfajdiga.plasma.tasksminimap
 INSTALL_DIR := ~/.local/share/plasma/plasmoids/${PACKAGE_NAME}
 
 install:

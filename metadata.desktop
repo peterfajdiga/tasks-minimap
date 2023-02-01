@@ -1,16 +1,16 @@
 [Desktop Entry]
 Encoding=UTF-8
-Name=Task Pager
-Comment=Taskbar-pager hybrid
+Name=Tasks Minimap
+Comment=Taskbar based on window positions
 Type=Service
 
 X-KDE-ParentApp=
 X-KDE-PluginInfo-Author=Peter Fajdiga
 X-KDE-PluginInfo-Email=peter.fajdiga@gmail.com
 X-KDE-PluginInfo-License=GPL
-X-KDE-PluginInfo-Name=peterfajdiga.plasma.taskpager
+X-KDE-PluginInfo-Name=peterfajdiga.plasma.tasksminimap
 X-KDE-PluginInfo-Version=2.0
-X-KDE-PluginInfo-Website=github.com/peterfajdiga/taskpager
+X-KDE-PluginInfo-Website=github.com/peterfajdiga/tasksminimap
 X-KDE-ServiceTypes=Plasma/Applet
 X-Plasma-API=declarativeappletscript
 X-Plasma-MainScript=ui/main.qml
