@@ -9,8 +9,7 @@ Item {
     id: root
 
     anchors.fill: parent
-    Layout.fillWidth: true
-    Layout.fillHeight: true
+    Layout.minimumWidth: childrenRect.width
 
     Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
     Plasmoid.constraintHints: PlasmaCore.Types.CanFillArea
