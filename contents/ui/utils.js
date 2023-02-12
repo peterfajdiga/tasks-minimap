@@ -49,14 +49,19 @@ function splitMinimizedTasks(tasks) {
 
 function sortTasks(tasks) {
     tasks.sort((a, b) => {
-        if (a.Geometry.x < b.Geometry.x) {
+        // using center instead of top-left corner works better with maximized windows
+        const aX = a.Geometry.x + a.Geometry.width / 2;
+        const bX = b.Geometry.x + b.Geometry.width / 2;
+        if (aX < bX) {
             return -1;
-        } else if (a.Geometry.x > b.Geometry.x) {
+        } else if (aX > bX) {
             return 1;
         } else {
-            if (a.Geometry.y < b.Geometry.y) {
+            const aY = a.Geometry.y + a.Geometry.height / 2;
+            const bY = b.Geometry.y + b.Geometry.height / 2;
+            if (aY < bY) {
                 return -1;
-            } else if (a.Geometry.y > b.Geometry.y) {
+            } else if (aY > bY) {
                 return 1;
             } else {
                 return 0;
