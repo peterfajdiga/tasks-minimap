@@ -1,0 +1,22 @@
+{
+    "KPackageStructure": "Plasma/Applet",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Name": "Peter Fajdiga",
+                "Email": "peter.fajdiga@gmail.com"
+            }
+        ],
+        "BugReportUrl": "https://github.com/peterfajdiga/tasks-minimap/issues",
+        "Category": "Windows and Tasks",
+        "Description": "Taskbar based on window positions",
+        "Id": "peterfajdiga.plasma.tasksMinimap",
+        "License": "GPLv3",
+        "Name": "Tasks Minimap",
+        "ServiceTypes": ["Plasma/Applet"],
+        "Version": "1.0",
+        "Website": "https://github.com/peterfajdiga/tasks-minimap"
+    },
+    "X-Plasma-API": "declarativeappletscript",
+    "X-Plasma-MainScript": "ui/main.qml"
+}
