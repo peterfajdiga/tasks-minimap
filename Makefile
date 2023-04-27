@@ -1,12 +1,13 @@
 PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
 INSTALL_DIR := ~/.local/share/plasma/plasmoids/${PACKAGE_NAME}
 
+.PHONY: install run package
+
 install:
-	mkdir -p ${INSTALL_DIR}
-	rm -r ${INSTALL_DIR}
-	mkdir ${INSTALL_DIR}
-	cp -r ./contents ${INSTALL_DIR}
-	cp ./metadata.desktop ${INSTALL_DIR}
+	kpackagetool5 -i ./package || kpackagetool5 -u ./package
 
 run: install
 	plasmoidviewer --applet ${PACKAGE_NAME}
+
+package:
+	cd ./package && zip -r - ./* > ../TasksMinimap.plasmoid
