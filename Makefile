@@ -1,6 +1,6 @@
-PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
-
 .PHONY: *
+
+PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
 
 install:
 	kpackagetool5 -i ./package || kpackagetool5 -u ./package
