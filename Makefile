@@ -1,5 +1,4 @@
 PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
-INSTALL_DIR := ~/.local/share/plasma/plasmoids/${PACKAGE_NAME}
 
 .PHONY: install run package
 
