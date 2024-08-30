@@ -17,6 +17,6 @@
         "Version": "1.0",
         "Website": "https://github.com/peterfajdiga/tasks-minimap"
     },
-    "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-API-Minimum-Version": "6.0",
+    "X-Plasma-Provides": ["org.kde.plasma.multitasking"]
 }

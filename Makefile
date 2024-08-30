@@ -1,15 +1,16 @@
+PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
+VERSION = $(shell grep '"Version":' ./package/metadata.json | grep -o '[0-9\.]*')
+
 .PHONY: *
 
-PACKAGE_NAME := peterfajdiga.plasma.tasksMinimap
-
 install:
-	kpackagetool5 -i ./package || kpackagetool5 -u ./package
+	kpackagetool6 --type=Plasma/Applet --install=./package || kpackagetool6 --type=Plasma/Applet --upgrade=./package
 
 uninstall:
-	kpackagetool5 -r ./package
+	kpackagetool6 --type=Plasma/Applet --remove=${PACKAGE_NAME}
 
 run: install
 	plasmoidviewer --applet ${PACKAGE_NAME}
 
 package:
-	cd ./package && zip -r - ./* > ../TasksMinimap.plasmoid
+	cd ./package && zip -r - ./* > ../TasksMinimap_${subst .,_,${VERSION}}.plasmoid

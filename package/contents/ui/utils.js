@@ -20,16 +20,20 @@ function updateTasks(tasksModel, tasksContainer) {
 
 function extractTasks(tasksModel) {
     const n = tasksModel.rowCount();
-    const tasks = new Array(n);
+    const tasks = [];
     for (let i = 0; i < n; i++) {
         const taskIndex = tasksModel.index(i, 0);
-        tasks[i] = {
+        const geometry = tasksModel.data(taskIndex, TASK_ROLE_GEOMETRY);
+        if (geometry === undefined) {
+            continue;
+        }
+        tasks.push({
             decoration: tasksModel.data(taskIndex, TASK_ROLE_ICON),
-            Geometry: tasksModel.data(taskIndex, TASK_ROLE_GEOMETRY),
+            Geometry: geometry,
             IsMinimized: tasksModel.data(taskIndex, TASK_ROLE_MINIMIZED),
             IsActive: tasksModel.data(taskIndex, TASK_ROLE_FOCUSED),
             tasksManagerIndex: taskIndex,
-        };
+        });
     }
     return tasks;
 }
